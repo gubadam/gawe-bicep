@@ -6,4 +6,10 @@ $timestamp = Get-Date -Format 'yyyyMMdd-HHmm'
 
 $deploymentName = "MyDeployment-$timestamp"
 
-New-AzResourceGroupDeployment -Name $deploymentName -ResourceGroupName $rgName -TemplateFile './templates/infra.bicep'
+$deploymentParams = @{
+	Name = $deploymentName
+	ResourceGroupName = $rgName
+	TemplateFile = './templates/infra.bicep'
+	TemplateParameterFile = './templates/infra.dev.parameters.json'
+}
+New-AzResourceGroupDeployment @deploymentParams 
