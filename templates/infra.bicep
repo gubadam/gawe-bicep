@@ -10,7 +10,7 @@ resource myResource 'Microsoft.Storage/storageAccounts@2021-02-01' = {
 }
 
 resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
-  name: 'keyvault'
+  name: 'kv-agbiceptest123'
   location: location
   properties: {
     enabledForDeployment: true
