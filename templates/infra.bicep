@@ -10,7 +10,7 @@ resource myResource 'Microsoft.Storage/storageAccounts@2021-02-01' = {
 }
 
 resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
-  name: 'name'
+  name: 'keyvault'
   location: location
   properties: {
     enabledForDeployment: true
@@ -18,19 +18,6 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
     enabledForDiskEncryption: true
     tenantId: tenant().tenantId
     accessPolicies: [
-      {
-        tenantId: 'tenantId'
-        objectId: 'objectId'
-        permissions: {
-          keys: [
-            'get'
-          ]
-          secrets: [
-            'list'
-            'get'
-          ]
-        }
-      }
     ]
     sku: {
       name: 'standard'
