@@ -1,0 +1,1 @@
+﻿Repo: https://github.com/PiotrWachulec/Bicep-Workshop-Basic
