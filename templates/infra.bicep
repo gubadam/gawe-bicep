@@ -1,5 +1,7 @@
-﻿param location string = resourceGroup().location
-param appName string
+﻿param appName string
+
+// param location string = resourceGroup().location
+param location string = 'westeurope'
 
 @allowed([
   'PROD'
@@ -7,13 +9,23 @@ param appName string
 ])
 param env string
 
-var storageAccountName = '${appName}sa'
+param sku string = 'F1'
 
-resource myResource 'Microsoft.Storage/storageAccounts@2021-02-01' = {
-  name: storageAccountName
-  location: location
-  kind: 'StorageV2'
-  sku: {
-    name: (env == 'PROD') ? 'Standard_GRS' : 'Standard_LRS'
+
+module storage 'data/data.bicep' = {
+  name: '${deployment().name}-data'
+  params: {
+    env: 'DEV'
+    appName: appName
+    location: location
+  }
+}
+
+module app 'app/appHosting.bicep' = {
+  name: '${deployment().name}-app'
+  params: {
+    env: 'DEV'
+    appName: appName
+    location: location
   }
 }
